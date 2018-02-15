@@ -1,0 +1,55 @@
+{% comment %} One space between opening and closing comment tags and the comment text. {% endcomment %}
+{% comment %}
+  Indentation: Use two spaces for each indent level.
+  Indent inside opening and closing template tags that span multiple lines.
+  Add extra indents to make HTML elements have the same indent level as their siblings.
+{% endcomment %}
+{% extends "base.html" %}
+
+{% comment %} One line between consecutive lines that start with a template tag. {% endcomment %}
+{% load staticfiles %}
+
+{% comment %} One space of padding inside all tags and variables. {% endcomment %}
+{% block title %}{{ flatpage.title }}{% endblock title %}
+
+{% comment %} 
+  Comments go directly above the code that they reference, with no space between the comment and the start of the code.
+{% endcomment %}
+{% block nav_tag %}
+  <nav class="navbar navbar--dark">
+  {% comment %} endblock tags use the block name. {% endcomment %}
+  {% comment %} Comments follow the same indentation rules as template tags and HTML elements. {% endcomment %}
+{% endblock nav_tag %} 
+
+  
+{% block page_content %}
+  <main class="page">
+    <ol class="breadcrumb">
+      <li>
+          {% comment %} These links have extra indent, so that they line up with their sibling <a></a> element in the if block below. {% endcomment %}
+          <a class="breadcrumb__link" href="#">Home</a>
+      </li>
+      <li>
+          <a class="breadcrumb__link" href="#">About</a>
+      </li>
+      <li>
+        {% if flatpage.title %}
+          <a class="breadcrumb__link active" href="">{{ flatpage.title }}</a>
+        {% else %}
+          <a href="">{{ flatpage.default_title }}</a>
+        {% endif %}
+      </li>
+    </ol>
+    <h2 class="page__title">{{ flatpage.title }}</h2>
+    <hr class="page__title-divider">
+    <div class="page__content">
+      {{ flatpage.content }}
+    </div>
+    {% if athlete_list %}
+      {% comment %} No space between variable, filter pipe, and filter name. {% endcomment %}
+      <p>Number of athletes: {{ athlete_list|length }}</p>
+    {% else %}
+        <p>No athletes.</p>
+    {% endif %}
+  </main>
+{% endblock page_content %}
